@@ -1,0 +1,132 @@
+#include <iostream>
+#include <iomanip>
+#include <cmath>
+#include <algorithm> // for min, max
+using namespace std;
+
+// Use numbers not letter when selecting which task
+
+//  Part A 
+// Task A1: Expressions & Assignments
+void taskA1() {
+    int a, b, c;
+    cout << "Enter three integers (include space) (a b c): ";
+    cin >> a >> b >> c;
+
+    cout << "a + b * c = " << a + b * c << endl;
+    cout << "(a + b) * c = " << (a + b) * c << endl;
+    cout << "a / b * c = " << a / b * c << endl;
+    cout << "a / (b * c) = " << a / (b * c) << endl;
+}
+
+// Task A2: Compound assignment
+void taskA2() {
+    double balance;
+    int deposits, withdrawals;
+    cout << "Enter balance, deposits, withdrawals: ";
+    cin >> balance >> deposits >> withdrawals;
+
+    balance += deposits * 25.50;    // deposits add
+    balance -= withdrawals * 12.75; // withdrawals subtract
+
+    cout << fixed << setprecision(2);
+    cout << "Final balance = " << balance << endl;
+}
+
+//  Part B 
+// Task B1: Average trap
+void taskB1() {
+    int x, y, z;
+    cout << "Enter three exam scores: ";
+    cin >> x >> y >> z;
+
+    int sum = x + y + z;
+    cout << "Raw average (implicit): " << sum / 3 << endl;
+    cout << "Correct average (explicit cast): " 
+         << static_cast<double>(sum) / 3 << endl;
+}
+
+// Task B2: Percentage with casting
+void taskB2() {
+    int wins, games;
+    cout << "Enter wins and games: ";
+    cin >> wins >> games;
+
+    if (games == 0) {
+        cout << "No games played." << endl;
+    } else {
+        double pct = static_cast<double>(wins) / games * 100.0;
+        cout << fixed << setprecision(1);
+        cout << "Win% = " << pct << "%" << endl;
+    }
+}
+
+//  Part C
+// Paycheck Calculator
+void taskC() {
+    double hours, rate;
+    cout << "Enter hours and rate: ";
+    cin >> hours >> rate;
+
+    double regHours = min(hours, 40.0);
+    double otHours = max(hours - 40.0, 0.0);
+
+    double gross = regHours * rate + otHours * rate * 1.5;
+    double tax = 0.18 * gross;
+    double benefits = 35.0;
+    double net = gross - tax - benefits;
+
+    cout << fixed << setprecision(2);
+    cout << "Regular: " << regHours << ", Overtime: " << otHours << endl;
+    cout << "Gross: $" << gross << endl;
+    cout << "Tax (18%): $" << tax << endl;
+    cout << "Benefits: $" << benefits << endl;
+    cout << "Net: $" << net << endl;
+}
+
+// Part D
+// Debugging fixed program
+void taskD() {
+    int items; double price;
+    cout << "Enter items and price: ";
+    cin >> items >> price;
+
+    double total = items * price; 
+    int discountPercent = 15;
+    double discount = total * (static_cast<double>(discountPercent) / 100.0);
+
+    double shipping = 5 + 2 * items;
+    double afterDiscount = total - discount;
+    if (afterDiscount >= 100.0) shipping = 0;
+
+    cout << fixed << setprecision(2);
+    cout << "Total: $" << total << "\n";
+    cout << "Discount: $" << discount << "\n";
+    cout << "Shipping: $" << shipping << "\n";
+    cout << "Grand Total: $" << (afterDiscount + shipping) << "\n";
+}
+
+//  Main Menu
+int main() {
+    int choice;
+    cout << "Choose a task to run:\n";
+    cout << "1. Task A1 (Expressions)\n";
+    cout << "2. Task A2 (Compound assignment)\n";
+    cout << "3. Task B1 (Average trap)\n";
+    cout << "4. Task B2 (Win percentage)\n";
+    cout << "5. Task C (Paycheck Calculator)\n";
+    cout << "6. Task D (Debugging)\n";
+    cout << "Enter choice: ";
+    cin >> choice;
+
+    switch (choice) {
+        case 1: taskA1(); break;
+        case 2: taskA2(); break;
+        case 3: taskB1(); break;
+        case 4: taskB2(); break;
+        case 5: taskC(); break;
+        case 6: taskD(); break;
+        default: cout << "Invalid choice." << endl;
+    }
+    return 0;
+}
