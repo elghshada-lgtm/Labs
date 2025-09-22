@@ -1,0 +1,100 @@
+#include <iostream>     //For std::cin, std::cout
+#include <limits>       //numeric_limits (inputs and outputs)
+#include <string>       //string used to help with texts
+
+// Enum class for menu options
+enum class Operation {
+    Add = 1,
+    Subtract,
+    Multiply,
+    Divide,
+    Quit
+};
+
+// Function to show calculator menu
+void showMenu() {
+    std::cout << "\n=== Calculator Menu ===\n";
+    std::cout << "1. Add\n";
+    std::cout << "2. Subtract\n";
+    std::cout << "3. Multiply\n";
+    std::cout << "4. Divide\n";
+    std::cout << "5. Quit\n";
+    std::cout << "Choose an option (1-5): ";
+}
+
+// Function to validate and read a double input
+bool readValidatedDouble(const std::string& prompt, double& value) {
+    std::cout << prompt;
+    std::cin >> value;
+
+    if (std::cin.fail()) {
+        std::cin.clear(); 
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); 
+        std::cout << "Invalid input, Please enter a numeric value.\n";
+        return false;
+    }
+
+    return true;
+}
+
+// Main program
+int main() {
+    bool running = true;
+
+    while (running) {
+        showMenu();
+
+        int choice;
+        std::cin >> choice;
+
+        // Validate menu choice
+        if (std::cin.fail() || choice < 1 || choice > 5) {
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            std::cout << "Invalid menu choice. Please try again.\n";
+            continue;
+        }
+
+        Operation op = static_cast<Operation>(choice);
+
+        if (op == Operation::Quit) {
+            std::cout << "Goodbye!\n";
+            break;
+        }
+
+        double a, b;
+
+        // Input and validate both numbers
+        while (!readValidatedDouble("Enter the first number: ", a));
+        while (!readValidatedDouble("Enter the second number: ", b));
+
+        // Perform calculation
+        switch (op) {
+            case Operation::Add:
+                std::cout << "Result: " << a << " + " << b << " = " << (a + b) << "\n";
+                break;
+            case Operation::Subtract:
+                std::cout << "Result: " << a << " - " << b << " = " << (a - b) << "\n";
+                break;
+            case Operation::Multiply:
+                std::cout << "Result: " << a << " * " << b << " = " << (a * b) << "\n";
+                break;
+            case Operation::Divide:
+                if (b == 0) {
+                    std::cout << "Error: Cannot divide by zero.\n";
+                } else {
+                    std::cout << "Result: " << a << " / " << b << " = " << (a / b) << "\n";
+                }
+                break;
+            default:
+                std::cout << "Unknown operation.\n";
+        }
+
+        std::cout << "------------------------\n";
+    }
+
+    return 0;
+}
+// Faces some minor problmes trying to reject division by zero but I got help and fixed it.
+// Had some problem trying to loop the program.
+// Video link:https://www.capcut.com/view/7552753682493227581?workspaceId=7481550709276540934 
