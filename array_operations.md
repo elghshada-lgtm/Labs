@@ -17,7 +17,7 @@ int main () {
   for (int i = 0; i < N; i++) {
     bool duplicate;
     do{
-      duplicate = falsa
+      duplicate = false;
       cout << "Element " << i +1 << ": ";
       cin >> numbers[i];
 
@@ -33,7 +33,7 @@ int main () {
 }
 
 cout << "\nChoose an operation: \n";
-Cout << "1. Sort in Ascending order\n";
+cout << "1. Sort in Ascending order\n";
 cout << "2. Sort in Descending order\n";
 cout << "3. Find the Maximum Number\n";
 cout << "Enter your choise: ";
@@ -41,15 +41,15 @@ cout << "Enter your choise: ";
 int choice; 
 cin >> choice;
 
-switch (choise) {
+switch (choice) {
   case 1: {
     // Sort in Ascending order:
     for (int i = 0; i < N -1; i++) {
-      for (int j = 0; j < n - i - 1; j++) {
-        if (numbers [j] > numbers [j + 1] {
+      for (int j = 0; j < N - i - 1; j++) {
+        if (numbers [j] > numbers [j + 1]) {
           int temp = numbers[j];
           numbers[j] = numbers[j + 1];
-          number[j + 1] = temp;
+          numbers[j + 1] = temp;
         }
       }
     }
@@ -63,11 +63,11 @@ switch (choise) {
   case 2: {
     // Sort in Descedning order
     for (int i = 0; i < N -1; i++) {
-      for (int j = 0; j < n - i - 1; j++) {
-        if (numbers [j] < numbers [j + 1] {
+      for (int j = 0; j < N - i - 1; j++) {
+        if (numbers [j] < numbers [j + 1]) {
           int temp = numbers[j];
           numbers[j] = numbers[j + 1];
-          number[j + 1] = temp;
+          numbers[j + 1] = temp;
         }
       }
     }
@@ -93,3 +93,5 @@ switch (choise) {
 }
 
 return 0;
+
+}
